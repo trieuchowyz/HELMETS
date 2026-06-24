@@ -1,0 +1,122 @@
+@extends('admin.layouts.app')
+@section('title', 'Thêm Mũ/Nón Mới')
+
+@section('content')
+<form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 border-bottom"><h6 class="mb-0 fw-bold">Hình ảnh sản phẩm</h6></div>
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    
+                    <div class="border rounded bg-light d-flex justify-content-center align-items-center p-2 mb-3 w-100" style="min-height: 350px;">
+                        <img id="img-preview" src="https://via.placeholder.com/400x400?text=Chưa+chọn+ảnh" class="img-fluid rounded w-100" style="object-fit: contain; max-height: 350px;">
+                    </div>
+
+                    <div class="w-100">
+                        <label class="form-label fw-bold">Tải ảnh lên từ máy tính (Ưu tiên)</label>
+                        <input type="file" name="img_upload" id="img_upload" class="form-control mb-2" accept="image/*">
+                        
+                        <label class="form-label text-muted mt-2">Hoặc nhập link ảnh (tùy chọn)</label>
+                        <input type="text" name="img" class="form-control form-control-sm" placeholder="https://...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0 fw-bold">Thông tin chi tiết</h6>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i> Lưu sản phẩm</button>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Tên sản phẩm</label>
+                        <input type="text" name="name" class="form-control form-control-lg fw-bold" required placeholder="VD: Mũ Fullface Royal M138B - Size L">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Danh mục</label>
+                            <select name="catid" class="form-select" required>
+                                <option value="">-- Chọn danh mục nón --</option>
+                                @foreach($categories as $cat)
+                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Giá bán (VNĐ)</label>
+                            <div class="input-group">
+                                <input type="number" name="price" class="form-control text-primary fw-bold" required placeholder="850000">
+                                <span class="input-group-text">VND</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex mb-4">
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <i class="fa fa-star text-warning"></i>
+                        <span class="ms-2 text-muted">(Mô phỏng hiển thị FE)</span>
+                    </div>
+
+                    <div class="bg-light p-3 rounded mb-4 border">
+                        <h6 class="fw-bold mb-3 border-bottom pb-2">Thông số kỹ thuật</h6>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text w-25">Size</span>
+                                    <input type="text" name="specs[size]" class="form-control" placeholder="M, L, XL...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text w-25">Màu</span>
+                                    <input type="text" name="specs[color]" class="form-control" placeholder="Đen nhám, Đỏ...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text w-25">Chất liệu</span>
+                                    <input type="text" name="specs[material]" class="form-control" placeholder="Nhựa ABS, Carbon...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text w-25">Trọng lượng</span>
+                                    <input type="text" name="specs[weight]" class="form-control" placeholder="850g...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Mô tả chi tiết</label>
+                        <textarea name="detail" rows="5" class="form-control" placeholder="Viết bài giới thiệu về sản phẩm này..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4 py-2 disabled" title="Nút này chỉ để mô phỏng giao diện">
+                        <i class="fa fa-shopping-bag me-2"></i> Thêm vào giỏ
+                    </button>
+                    <a href="{{ route('admin.products') }}" class="btn btn-link text-decoration-none text-muted ms-3">Quay lại danh sách</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    document.getElementById('img_upload').onchange = function(evt) {
+        const [file] = this.files;
+        if (file) {
+            document.getElementById('img-preview').src = URL.createObjectURL(file);
+        }
+    };
+</script>
+@endsection
