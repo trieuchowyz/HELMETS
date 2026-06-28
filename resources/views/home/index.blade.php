@@ -66,8 +66,8 @@
                 <div class="d-inline-flex align-items-center">
                     <i class="fa fa-sync-alt fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Free Return</h6>
-                        <p class="mb-0">30 days money back guarantee!</p>
+                        <h6 class="text-uppercase mb-2">Miễn phí đổi trả</h6>
+                        <p class="mb-0">Lên đến 15 ngày sau khi nhận hàng</p>
                     </div>
                 </div>
             </div>
@@ -77,8 +77,8 @@
                 <div class="d-flex align-items-center">
                     <i class="fab fa-telegram-plane fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Free Shipping</h6>
-                        <p class="mb-0">Free shipping on all order</p>
+                        <h6 class="text-uppercase mb-2">Miễn phí ship</h6>
+                        <p class="mb-0">Miễn phí ship trên toàn quốc</p>
                     </div>
                 </div>
             </div>
@@ -88,8 +88,8 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-life-ring fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Support 24/7</h6>
-                        <p class="mb-0">We support online 24 hrs a day</p>
+                        <h6 class="text-uppercase mb-2">Hỗ trợ 24/7</h6>
+                        <p class="mb-0">Luôn hỗ trợ quý khách hàng mọi lúc</p>
                     </div>
                 </div>
             </div>
@@ -99,8 +99,8 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-credit-card fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Receive Gift Card</h6>
-                        <p class="mb-0">Recieve gift all over oder $50</p>
+                        <h6 class="text-uppercase mb-2">Voucher</h6>
+                        <p class="mb-0">Voucher giảm giá lên đến 50%</p>
                     </div>
                 </div>
             </div>
@@ -110,8 +110,8 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-lock fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Secure Payment</h6>
-                        <p class="mb-0">We Value Your Security</p>
+                        <h6 class="text-uppercase mb-2">Bảo mật thông tin khách hàng</h6>
+                        <p class="mb-0"></p>
                     </div>
                 </div>
             </div>
@@ -121,8 +121,8 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-blog fa-2x text-primary"></i>
                     <div class="ms-4">
-                        <h6 class="text-uppercase mb-2">Online Service</h6>
-                        <p class="mb-0">Free return products in 30 days</p>
+                        <h6 class="text-uppercase mb-2">Bảo hành</h6>
+                        <p class="mb-0">Lên đến 1 năm</p>
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
 <!-- Searvices End -->
 
 <!-- Products Offer Start -->
-<div class="container-fluid bg-light py-5">
+<!-- <div class="container-fluid bg-light py-5">
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
@@ -161,7 +161,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Products Offer End -->
 
 
@@ -171,15 +171,15 @@
         <div class="tab-class">
             <div class="row g-4">
                 <div class="col-lg-4 text-start wow fadeInLeft" data-wow-delay="0.1s">
-                    <h1>Our Products</h1>
+                    <h1>Tất cả sản phẩm</h1>
                 </div>
                 <div class="col-lg-8 text-end wow fadeInRight" data-wow-delay="0.1s">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5">
                         <li class="nav-item mb-4">
-                            <a class="d-flex mx-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
+                            <!-- <a class="d-flex mx-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
                                 href="#tab-1">
                                 <span class="text-dark" style="width: 130px;">All Products</span>
-                            </a>
+                            </a> -->
                         </li>
                     </ul>
                 </div>
@@ -193,30 +193,29 @@
                                 <div class="product-item-inner border rounded">
                                     <div class="product-item-inner-item">
                                         <a href="{{ url("/{$item->menu->slug}/{$item->slug}-{$item->id}.html") }}">
-                                            <img src="{{ $item->img }}" class="img-fluid w-100 rounded-top"
-                                                alt="{{ $item->name }}">
+                                            <img src="{{ $item->img }}" class="img-fluid w-100 rounded-top" alt="{{ $item->name }}">
                                         </a>
                                         <div class="product-sale">Sale</div>
                                         <div class="product-details">
-                                            <a
-                                                href="{{ url("/{$item->menu->slug}/{$item->slug}-{$item->id}.html") }}"><i
-                                                    class="fa fa-eye fa-1x"></i></a>
+                                            <a href="{{ url("/{$item->menu->slug}/{$item->slug}-{$item->id}.html") }}">
+                                                <i class="fa fa-eye fa-1x"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="text-center rounded-bottom p-4">
-                                        <a href="{{ url("/" . ($item->menu?->slug ?? 'san-pham') . "/{$item->slug}-{$item->id}.html") }}" class="d-block mb-2 text-dark fw-bold text-truncate" title="{{ $item->name }}">
-                                            {{ $item->name }}
-                                        </a>
-                                        <span class="text-danger fs-5 fw-bold">{{ number_format($item->price, 0, ',', '.') }}đ</span>
+                                        <a href="{{ url("/{$item->menu->slug}/{$item->slug}-{$item->id}.html") }}" class="d-block mb-2">{{ $item->name }}</a>
+                                        <a href="{{ url("/{$item->menu->slug}/{$item->slug}-{$item->id}.html") }}" class="d-block h4">{{ $item->title }}</a>
+                                        <span class="text-primary fs-5">${{ number_format($item->price, 2) }}</span>
                                     </div>
                                 </div>
-                                <div
-                                    class="product-item-add border border-top-0 rounded-bottom  text-center p-4 pt-0">
+                                <div class="product-item-add border border-top-0 rounded-bottom text-center p-4 pt-0">
+
                                     <button type="button"
                                         class="btn btn-primary border-secondary rounded-pill py-2 px-4 mb-4 btn-add-cart"
-                                        data-id="{{ $item->id }}">
+                                        data-url="{{ url('/addproduct/' . $item->id . '/1') }}">
                                         <i class="fas fa-shopping-cart me-2"></i> Add To Cart
                                     </button>
+
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex">
                                             <i class="fas fa-star text-primary"></i>
@@ -226,14 +225,14 @@
                                             <i class="fas fa-star"></i>
                                         </div>
                                         <div class="d-flex">
-                                            <a href="#"
-                                                class="text-primary d-flex align-items-center justify-content-center me-3"><span
-                                                    class="rounded-circle btn-sm-square border"><i
-                                                        class="fas fa-random"></i></i></a>
-                                            <a href="#"
-                                                class="text-primary d-flex align-items-center justify-content-center me-0"><span
-                                                    class="rounded-circle btn-sm-square border"><i
-                                                        class="fas fa-heart"></i></a>
+                                            <a href="#" class="text-primary d-flex align-items-center justify-content-center me-3">
+                                                <span class="rounded-circle btn-sm-square border">
+                                                    <i class="fas fa-random"></i> </span>
+                                            </a>
+                                            <a href="#" class="text-primary d-flex align-items-center justify-content-center me-0">
+                                                <span class="rounded-circle btn-sm-square border">
+                                                    <i class="fas fa-heart"></i>
+                                                </span> </a>
                                         </div>
                                     </div>
                                 </div>
@@ -249,7 +248,7 @@
 <!-- Our Products End -->
 
 <!-- Product Banner Start -->
-<div class="container-fluid py-5">
+<!-- <div class="container-fluid py-5">
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
@@ -282,11 +281,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Product Banner End -->
 
 <!-- Product List Satrt -->
-<div class="container-fluid products productList overflow-hidden">
+<!-- <div class="container-fluid products productList overflow-hidden">
     <div class="container products-mini py-5">
         <div class="mx-auto text-center mb-5" style="max-width: 900px;">
             <h4 class="text-primary border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
@@ -784,11 +783,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Product List End -->
 
 <!-- Bestseller Products Start -->
-<div class="container-fluid products pb-5">
+<!-- <div class="container-fluid products pb-5">
     <div class="container products-mini py-5">
         <div class="mx-auto text-center mb-5" style="max-width: 700px;">
             <h4 class="text-primary mb-4 border-bottom border-primary border-2 d-inline-block p-2 title-border-radius wow fadeInUp"
@@ -1004,45 +1003,40 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Bestseller Products End -->
 
 @include('partials.tastimonial')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const addCartBtns = document.querySelectorAll('.btn-add-cart');
-        addCartBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const pid = this.getAttribute('data-id');
+// Gắn trực tiếp vào document, dùng capture phase (true) để bắt sự kiện sớm nhất
+document.addEventListener('click', function(e) {
+    // Kiểm tra xem phần tử bị click có class .btn-add-cart không
+    // hoặc có nằm trong phần tử có class .btn-add-cart không (để bắt luôn cả icon)
+    const btn = e.target.closest('.btn-add-cart');
+    
+    if (btn) {
+        e.preventDefault();
+        
+        const url = btn.getAttribute('data-url');
+        console.log("Đang gửi yêu cầu tới:", url); // Kiểm tra xem log này có hiện trong console không
 
-                // Gọi Ajax lên method addcart trong Controller
-                fetch(`/addproduct/${pid}/1`, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    })
-                    .then(response => {
-                        if (response.status === 401) {
-                            // Bắt buộc đăng nhập nếu chưa auth
-                            window.location.href = "{{ route('login') }}";
-                            throw new Error('Vui lòng đăng nhập!');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data && data.message) {
-                            alert(data
-                                .message); // Có thể thay bằng thư viện Toastr/SweetAlert cho đẹp
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            });
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Server phản hồi:", data);
+            alert(data.message || "Đã thêm thành công!");
+        })
+        .catch(err => {
+            console.error("Lỗi kết nối:", err);
+            alert("Có lỗi xảy ra, hãy kiểm tra console!");
         });
-    });
+    }
+}, true); 
 </script>
 @endsection

@@ -44,7 +44,23 @@
                             <select name="catid" class="form-select" required>
                                 <option value="">-- Chọn danh mục nón --</option>
                                 @foreach($categories as $cat)
-                                    <option value="{{ $cat->id }}" {{ $product->catid == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                                    @if(empty($cat->parentid))
+                                        @php $children = $categories->where('parentid', $cat->id); @endphp
+                                        
+                                        @if($children->count() > 0)
+                                            <optgroup label="Mục: {{ $cat->name }}">
+                                                @foreach($children as $child)
+                                                    <option value="{{ $child->id }}" {{ $product->catid == $child->id ? 'selected' : '' }}>
+                                                        --- {{ $child->name }}
+                                                    </option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option value="{{ $cat->id }}" {{ $product->catid == $cat->id ? 'selected' : '' }}>
+                                                {{ $cat->name }}
+                                            </option>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -106,13 +122,4 @@
         </div>
     </div>
 </form>
-
-<script>
-    document.getElementById('img_upload').onchange = function(evt) {
-        const [file] = this.files;
-        if (file) {
-            document.getElementById('img-preview').src = URL.createObjectURL(file);
-        }
-    };
-</script>
 @endsection

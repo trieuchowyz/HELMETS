@@ -19,7 +19,7 @@
         <div class="card text-white bg-success shadow-sm h-100">
             <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
-                    <h6 class="text-uppercase mb-2">Linh kiện PC</h6>
+                    <h6 class="text-uppercase mb-2">Quản lý sản phẩm</h6>
                     <h2 class="mb-0">{{ $totalProducts }}</h2>
                 </div>
                 <i class="fas fa-boxes fa-3x opacity-50"></i>

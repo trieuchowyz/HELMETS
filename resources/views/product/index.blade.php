@@ -2,7 +2,7 @@
 @section('noidungwebsite')
 @include('partials.singlepageheader')
 
-<div class="container-fluid bg-light py-5">
+<!-- <div class="container-fluid bg-light py-5">
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="container-fluid shop py-5">
     <div class="container py-5">
         <div class="row g-4">
@@ -309,15 +309,64 @@
                             @endforeach
                         </div>
 
+                        
                         <div class="row mt-5">
                             <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="pagination d-flex justify-content-center mt-5">
-                                    <a href="{{ $trangtruoc ?? '#' }}" class="rounded">&laquo;</a>
-                                    <a href="#" class="active rounded">{{ $page ?? 1 }}</a>
-                                    <a href="{{ $trangsau ?? '#' }}" class="rounded">&raquo;</a>
+
+                                    {{-- Nút Về trang trước --}}
+                                    @if ($products->onFirstPage())
+                                    <a href="javascript:void(0)" class="rounded text-muted" style="pointer-events: none;">&laquo;</a>
+                                    @else
+                                    <a href="{{ $products->previousPageUrl() }}" class="rounded">&laquo;</a>
+                                    @endif
+
+                                    {{-- Thuật toán tính toán số trang để hiển thị dấu ... --}}
+                                    @php
+                                    $currentPage = $products->currentPage();
+                                    $lastPage = $products->lastPage();
+
+                                    // Hiển thị 2 trang trước và 2 trang sau trang hiện tại
+                                    $start = max($currentPage - 2, 1);
+                                    $end = min($currentPage + 2, $lastPage);
+                                    @endphp
+
+                                    {{-- Nút trang 1 và dấu ... ở đầu --}}
+                                    @if($start > 1)
+                                    <a href="{{ $products->url(1) }}" class="rounded">1</a>
+                                    @if($start > 2)
+                                    <span class="rounded" style="pointer-events: none; border: none;">...</span>
+                                    @endif
+                                    @endif
+
+                                    {{-- Các nút số trang --}}
+                                    @for($i = $start; $i <= $end; $i++)
+                                        @if($i==$currentPage)
+                                        <a href="javascript:void(0)" class="active rounded">{{ $i }}</a>
+                                        @else
+                                        <a href="{{ $products->url($i) }}" class="rounded">{{ $i }}</a>
+                                        @endif
+                                        @endfor
+
+                                        {{-- Dấu ... ở cuối và nút trang cuối cùng --}}
+                                        @if($end < $lastPage)
+                                            @if($end < $lastPage - 1)
+                                            <span class="rounded" style="pointer-events: none; border: none;">...</span>
+                                            @endif
+                                            <a href="{{ $products->url($lastPage) }}" class="rounded">{{ $lastPage }}</a>
+                                            @endif
+
+                                            {{-- Nút Sang trang tiếp theo --}}
+                                            @if ($products->hasMorePages())
+                                            <a href="{{ $products->nextPageUrl() }}" class="rounded">&raquo;</a>
+                                            @else
+                                            <a href="javascript:void(0)" class="rounded text-muted" style="pointer-events: none;">&raquo;</a>
+                                            @endif
+
                                 </div>
                             </div>
                         </div>
+                        
 
                     </div>
                 </div>
@@ -325,7 +374,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid py-5">
+<!-- <div class="container-fluid py-5">
     <div class="container pb-5">
         <div class="row g-4">
             <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
@@ -358,7 +407,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 {{-- Kịch bản JS cho trang Index --}}
 {{-- Đoạn script này nằm cuối file, trước @endsection --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -376,7 +425,7 @@
                     alert(response.message || "Đã thêm vào giỏ hàng!");
                 },
                 error: function(xhr) {
-                    if(xhr.status === 401) {
+                    if (xhr.status === 401) {
                         alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
                         window.location.href = '/login';
                     } else {

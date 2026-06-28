@@ -44,7 +44,19 @@
                             <select name="catid" class="form-select" required>
                                 <option value="">-- Chọn danh mục nón --</option>
                                 @foreach($categories as $cat)
-                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @if(empty($cat->parentid))
+                                        @php $children = $categories->where('parentid', $cat->id); @endphp
+                                        
+                                        @if($children->count() > 0)
+                                            <optgroup label="Mục: {{ $cat->name }}">
+                                                @foreach($children as $child)
+                                                    <option value="{{ $child->id }}">--- {{ $child->name }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @else
+                                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -66,57 +78,15 @@
                         <span class="ms-2 text-muted">(Mô phỏng hiển thị FE)</span>
                     </div>
 
-                    <div class="bg-light p-3 rounded mb-4 border">
-                        <h6 class="fw-bold mb-3 border-bottom pb-2">Thông số kỹ thuật</h6>
-                        <div class="row g-2">
-                            <div class="col-md-6">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text w-25">Size</span>
-                                    <input type="text" name="specs[size]" class="form-control" placeholder="M, L, XL...">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text w-25">Màu</span>
-                                    <input type="text" name="specs[color]" class="form-control" placeholder="Đen nhám, Đỏ...">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text w-25">Chất liệu</span>
-                                    <input type="text" name="specs[material]" class="form-control" placeholder="Nhựa ABS, Carbon...">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-text w-25">Trọng lượng</span>
-                                    <input type="text" name="specs[weight]" class="form-control" placeholder="850g...">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="mb-4">
                         <label class="form-label fw-bold">Mô tả chi tiết</label>
                         <textarea name="detail" rows="5" class="form-control" placeholder="Viết bài giới thiệu về sản phẩm này..."></textarea>
                     </div>
 
-                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4 py-2 disabled" title="Nút này chỉ để mô phỏng giao diện">
-                        <i class="fa fa-shopping-bag me-2"></i> Thêm vào giỏ
-                    </button>
                     <a href="{{ route('admin.products') }}" class="btn btn-link text-decoration-none text-muted ms-3">Quay lại danh sách</a>
                 </div>
             </div>
         </div>
     </div>
 </form>
-
-<script>
-    document.getElementById('img_upload').onchange = function(evt) {
-        const [file] = this.files;
-        if (file) {
-            document.getElementById('img-preview').src = URL.createObjectURL(file);
-        }
-    };
-</script>
 @endsection

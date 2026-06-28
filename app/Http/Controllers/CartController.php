@@ -93,6 +93,7 @@ class CartController extends Controller
                 'total' => $total
             ]);
             return response()->json(['message' => "Đã thêm sản phẩm $product->name vào giỏ hàng"], 201);
+            
         }
     }
 

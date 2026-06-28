@@ -16,7 +16,7 @@ class HomeController extends Controller
         $products = Product::with('menu')
             ->where('parent_id', null)
             ->orderby('id', 'desc')
-            ->limit(8)
+            // ->limit(8)
             ->get();
         return view('home.index', compact('products'));
     }

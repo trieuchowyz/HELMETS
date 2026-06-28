@@ -47,16 +47,26 @@ class AdminController extends Controller
     public function storeProduct(Request $request)
     {
         $imagePath = null;
-        // Xử lý upload file ảnh từ máy tính
+        
+        // 1. Lấy thông tin danh mục để làm tên thư mục chứa ảnh
+        $category = Category::find($request->catid);
+        // Dùng slug của danh mục làm tên folder (VD: mu-xe-dap), nếu không có thì cho vào thư mục 'khac'
+        $folderName = $category ? $category->slug : 'khac'; 
+
+        // 2. Xử lý upload file ảnh
         if ($request->hasFile('img_upload')) {
             $file = $request->file('img_upload');
-            // Đổi tên file để không bị trùng (gắn thêm timestamp)
             $filename = time() . '_' . $file->getClientOriginalName();
-            // Lưu vào thư mục public/uploads/products
-            $file->move(public_path('uploads/products'), $filename);
-            $imagePath = '/uploads/products/' . $filename;
+            
+            // Đường dẫn mới sẽ tự động nối thêm tên folder danh mục
+            $destinationPath = public_path('uploads/products/' . $folderName);
+            
+            // move() sẽ tự tạo folder 'mu-xe-dap' nếu nó chưa có
+            $file->move($destinationPath, $filename);
+            
+            // Lưu đường dẫn này vào Database
+            $imagePath = '/uploads/products/' . $folderName . '/' . $filename;
         } else {
-            // Nếu không up file thì lấy link mạng (nếu có nhập)
             $imagePath = $request->img;
         }
 
@@ -87,14 +97,20 @@ class AdminController extends Controller
     public function updateProduct(Request $request, $id)
     {
         $product = Product::findOrFail($id);
-        $imagePath = $product->img; // Mặc định giữ ảnh cũ
+        $imagePath = $product->img; 
 
-        // Nếu có up ảnh mới thì lưu ảnh mới
+        // Lấy tên folder y như hàm thêm mới
+        $category = Category::find($request->catid);
+        $folderName = $category ? $category->slug : 'khac';
+
         if ($request->hasFile('img_upload')) {
             $file = $request->file('img_upload');
             $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/products'), $filename);
-            $imagePath = '/uploads/products/' . $filename;
+            
+            $destinationPath = public_path('uploads/products/' . $folderName);
+            $file->move($destinationPath, $filename);
+            
+            $imagePath = '/uploads/products/' . $folderName . '/' . $filename;
         } elseif ($request->filled('img')) {
             $imagePath = $request->img;
         }
@@ -119,5 +135,40 @@ class AdminController extends Controller
         Product::findOrFail($id)->delete();
         return back()->with('success', 'Đã xóa sản phẩm!');
     }
+    // ==========================================
+    // 3. QUẢN LÝ ĐƠN HÀNG
+    // ==========================================
     
+    // Hiển thị danh sách đơn hàng
+    public function orders()
+    {
+        // Lấy danh sách đơn hàng, kèm thông tin user (khách hàng), sắp xếp mới nhất lên đầu
+        $orders = Order::with('user')->orderBy('id', 'desc')->paginate(10);
+        
+        // Trả về view danh sách đơn hàng (giả sử bạn lưu file index.blade.php của đơn hàng trong thư mục admin/orders)
+        return view('admin.orders.index', compact('orders'));
+    }
+
+    // Hiển thị chi tiết một đơn hàng
+    public function orderDetail($id)
+    {
+        // Lấy đơn hàng theo ID, kèm theo thông tin user và chi tiết các sản phẩm trong đơn
+        $order = Order::with(['user', 'details.product'])->findOrFail($id);
+        
+        // Trả về view chi tiết đơn hàng
+        return view('admin.orders.detail', compact('order'));
+    }
+
+    // Cập nhật trạng thái đơn hàng
+    public function updateOrderStatus(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        
+        // Cập nhật trạng thái mới lấy từ form select
+        $order->update([
+            'status' => $request->status
+        ]);
+
+        return back()->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+    }
 }

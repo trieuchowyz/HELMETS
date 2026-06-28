@@ -28,7 +28,7 @@
                             <tr class="cart-row" data-id="{{ $i->id }}">
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ $i->product->img }}" class="img-fluid me-5 rounded"
+                                        <img src="{{ asset($i->product->img) }}" class="img-fluid me-5 rounded"
                                             style="width: 80px; height: 80px; object-fit: cover;" alt="{{ $i->product->name }}">
                                     </div>
                                 </th>
@@ -36,7 +36,7 @@
                                     <p class="mb-0 mt-4 fw-bold">{{ $i->product->name }}</p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">{{ Illuminate\Support\Number::currency($i->price, 'VND') }}</p>
+                                    <p class="mb-0 mt-4">{{ number_format($i->price, 0, ',', '.') }}đ</p>
                                 </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
@@ -56,7 +56,7 @@
                                 </td>
                                 <td>
                                     <p class="mb-0 mt-4 item-total text-danger fw-bold" id="item-total-{{ $i->id }}">
-                                        {{ Illuminate\Support\Number::currency($i->total, 'VND') }}
+                                        {{ number_format($i->total, 0, ',', '.') }}đ
                                     </p>
                                 </td>
                                 <td>
@@ -82,17 +82,17 @@
                         <h1 class="display-6 mb-4">Tổng <span class="fw-normal">Giỏ Hàng</span></h1>
                         <div class="d-flex justify-content-between mb-4 border-bottom pb-3">
                             <h5 class="mb-0 me-4">Tạm tính:</h5>
-                            <p class="mb-0 fw-bold" id="cart-subtotal">{{ Illuminate\Support\Number::currency($total, 'VND') }}</p>
+                            <p class="mb-0 fw-bold" id="cart-subtotal">{{ number_format($total, 0, ',', '.') }}đ</p>
                         </div>
                         <div class="d-flex justify-content-between mb-4 border-bottom pb-3">
                             <h5 class="mb-0 me-4">Phí vận chuyển:</h5>
                             <div class="">
-                                <p class="mb-0">Cố định: 75.000 ₫</p>
+                                <p class="mb-0">Cố định: 75.000đ</p>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 ps-4 me-4">Thành tiền</h5>
-                            <p class="mb-0 pe-4 text-danger fw-bold fs-5" id="cart-total">{{ Illuminate\Support\Number::currency($total + 75000, 'VND') }}</p>
+                            <p class="mb-0 pe-4 text-danger fw-bold fs-5" id="cart-total">{{ number_format($total + 75000, 0, ',', '.') }}đ</p>
                         </div>
                         <a href="{{ route('cart.checkout') }}" class="btn btn-primary rounded-pill px-4 py-3 text-uppercase w-100 fw-bold">Tiến hành đặt hàng</a>
                     </div>
@@ -104,8 +104,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Đã fix định dạng JS để nối thêm chữ "đ" giống y hệt lúc blade render
             function formatCurrency(amount) {
-                return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+                return amount.toLocaleString('vi-VN') + 'đ';
             }
 
             function updateCartItem(id, quantity) {
