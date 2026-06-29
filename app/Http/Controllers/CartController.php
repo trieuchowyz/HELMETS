@@ -17,11 +17,21 @@ class CartController extends Controller
         try {
             $cart = Cart::find($request->id);
             if($cart) {
-                $cart->quantity = $request->quantity;
+                $product = Product::find($cart->product_id);
+                $req_qty = $request->quantity;
+
+                // KIỂM TRA TỒN KHO
+                if($req_qty > $product->quantity) {
+                    return response()->json([
+                        'success' => false, 
+                        'message' => 'Kho chỉ còn ' . $product->quantity . ' sản phẩm!'
+                    ]);
+                }
+
+                $cart->quantity = $req_qty;
                 $cart->total = $cart->quantity * $cart->price;
                 $cart->save();
 
-                // Tính lại tổng tiền của toàn bộ giỏ hàng
                 $total = Cart::where('user_id', Auth::id())->sum('total');
 
                 return response()->json([
@@ -69,43 +79,56 @@ class CartController extends Controller
     public function addcart(int $pid, int $q = 1){
         $user_id = Auth::id();
         $product = Product::find($pid);
+        
         if(!$product){
-            return response()->json(['message' => 'Không tìm thấy sản phẩm'], 201);
+            return response()->json(['message' => 'Không tìm thấy sản phẩm'], 404);
         }
+
         $cart = Cart::where('user_id', $user_id)->where('product_id', $pid)->first();
+        
+        // Tính tổng số lượng nếu khách thêm vào giỏ
+        $newQuantity = $cart ? $cart->quantity + $q : $q;
+
+        // KIỂM TRA VỚI TỒN KHO
+        if($newQuantity > $product->quantity){
+            return response()->json(['message' => 'Rất tiếc, kho chỉ còn ' . $product->quantity . ' sản phẩm!'], 400);
+        }
+
         if($cart){
-            //Tăng số lượng sp trong giỏ hàng
-            $cart->quantity = $cart->quantity + $q;
+            // Tăng số lượng sp trong giỏ hàng
+            $cart->quantity = $newQuantity;
             $cart->total = $cart->quantity * $cart->price;
             $cart->save();
             return response()->json(['message' => "Đã thêm sản phẩm $product->name vào giỏ hàng"], 201);
         }
         else {
-            $quantity = $q;
-            $price = $product->price;
-            $total = $quantity * $price;
-
             Cart::create([
                 'user_id' => $user_id,
                 'product_id' => $pid,
-                'quantity' => $quantity,
-                'price' => $price,
-                'total' => $total
+                'quantity' => $q,
+                'price' => $product->price,
+                'total' => $q * $product->price
             ]);
             return response()->json(['message' => "Đã thêm sản phẩm $product->name vào giỏ hàng"], 201);
-            
         }
     }
 
     public function updatecart(Request $request) {
         try{
-            //để cập nhật sl thì cần id của giỏ hàng
-            $id = $request->id;//mảng id giỏ hàng
-            $quantity = $request->quantity;//mảng số lượng
+            $id = $request->id;
+            $quantity = $request->quantity;
             for($i = 0; $i < sizeof($id); $i++){
                 $cart = Cart::find($id[$i]);
                 if($cart){
-                    $cart->quantity = $quantity[$i];
+                    $product = Product::find($cart->product_id);
+                    $qty = $quantity[$i];
+                    
+                    // Nếu nhập lố, tự ép về số lượng tối đa của kho
+                    if($qty > $product->quantity) {
+                        $qty = $product->quantity;
+                    }
+
+                    $cart->quantity = $qty;
                     $cart->total = $cart->quantity * $cart->price;
                     $cart->save();
                 }
@@ -115,7 +138,6 @@ class CartController extends Controller
         catch(Exception $e){
             return redirect()->back()->with('error', 'Lỗi cập nhật giỏ hàng');
         }
-
     }
 
     // Giao diện điền thông tin đặt hàng
@@ -131,6 +153,7 @@ class CartController extends Controller
     }
 
     // Xử lý lưu đơn hàng vào Database
+    // Xử lý lưu đơn hàng vào Database
     public function processCheckout(Request $request)
     {
         $request->validate([
@@ -138,9 +161,17 @@ class CartController extends Controller
         ]);
 
         $userId = Auth::id();
-        $carts =Cart::where('user_id', $userId)->get();
+        $carts = Cart::where('user_id', $userId)->get();
         
         if ($carts->isEmpty()) return back();
+
+        // BƯỚC QUAN TRỌNG: Kiểm tra kho lần cuối trước khi tạo đơn
+        foreach ($carts as $cart) {
+            $product = Product::find($cart->product_id);
+            if (!$product || $product->quantity < $cart->quantity) {
+                return back()->with('error', 'Sản phẩm "' . ($product->name ?? 'Không rõ') . '" chỉ còn ' . ($product->quantity ?? 0) . ' cái trong kho, vui lòng giảm số lượng!');
+            }
+        }
 
         // 1. Tạo đơn hàng mới
         $order = Order::create([
@@ -151,7 +182,7 @@ class CartController extends Controller
             'status' => 'pending' // Mặc định là chờ xử lý
         ]);
 
-        // 2. Chuyển SP từ Giỏ hàng sang Chi tiết đơn hàng
+        // 2. Chuyển SP từ Giỏ hàng sang Chi tiết đơn hàng VÀ TRỪ KHO
         foreach ($carts as $cart) {
             OrderDetail::create([
                 'order_id' => $order->id,
@@ -159,6 +190,13 @@ class CartController extends Controller
                 'quantity' => $cart->quantity,
                 'price' => $cart->price
             ]);
+
+            // TRỪ SỐ LƯỢNG KHO ĐI
+            $product = Product::find($cart->product_id);
+            if ($product) {
+                $product->quantity -= $cart->quantity;
+                $product->save();
+            }
         }
 
         // 3. Xóa sạch giỏ hàng cũ của user này

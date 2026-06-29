@@ -18,8 +18,8 @@
                         <label class="form-label fw-bold">Tải ảnh lên từ máy tính (Ưu tiên)</label>
                         <input type="file" name="img_upload" id="img_upload" class="form-control mb-2" accept="image/*">
                         
-                        <label class="form-label text-muted mt-2">Hoặc nhập link ảnh (tùy chọn)</label>
-                        <input type="text" name="img" class="form-control form-control-sm" placeholder="https://...">
+                        <!-- <label class="form-label text-muted mt-2">Hoặc nhập link ảnh (tùy chọn)</label>
+                        <input type="text" name="img" class="form-control form-control-sm" placeholder="https://..."> -->
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <label class="form-label">Danh mục</label>
                             <select name="catid" class="form-select" required>
                                 <option value="">-- Chọn danh mục nón --</option>
@@ -60,12 +60,16 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label">Giá bán (VNĐ)</label>
                             <div class="input-group">
                                 <input type="number" name="price" class="form-control text-primary fw-bold" required placeholder="850000">
-                                <span class="input-group-text">VND</span>
+                                <span class="input-group-text">đ</span>
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Số lượng</label>
+                            <input type="number" name="quantity" class="form-control fw-bold" required min="0" value="10">
                         </div>
                     </div>
 
@@ -75,7 +79,7 @@
                         <i class="fa fa-star text-warning"></i>
                         <i class="fa fa-star text-warning"></i>
                         <i class="fa fa-star text-warning"></i>
-                        <span class="ms-2 text-muted">(Mô phỏng hiển thị FE)</span>
+                        <span class="ms-2 text-muted"></span>
                     </div>
 
                     <div class="mb-4">

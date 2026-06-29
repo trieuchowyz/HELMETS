@@ -15,6 +15,7 @@ class HomeController extends Controller
     {
         $products = Product::with('menu')
             ->where('parent_id', null)
+            ->where('quantity', '>', 0) // <-- BỔ SUNG DÒNG NÀY ĐỂ ẨN SẢN PHẨM HẾT HÀNG
             ->orderby('id', 'desc')
             // ->limit(8)
             ->get();

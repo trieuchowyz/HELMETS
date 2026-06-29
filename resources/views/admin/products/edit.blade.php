@@ -15,11 +15,11 @@
                     </div>
 
                     <div class="w-100">
-                        <label class="form-label fw-bold">Tải ảnh mới (Bỏ trống nếu giữ ảnh cũ)</label>
+                        <label class="form-label fw-bold">Tải ảnh mới </label>
                         <input type="file" name="img_upload" id="img_upload" class="form-control mb-2" accept="image/*">
                         
-                        <label class="form-label text-muted mt-2">Link ảnh ngoài</label>
-                        <input type="text" name="img" class="form-control form-control-sm" value="{{ $product->img }}">
+                        <!-- <label class="form-label text-muted mt-2">Link ảnh ngoài</label>
+                        <input type="text" name="img" class="form-control form-control-sm" value="{{ $product->img }}"> -->
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <label class="form-label">Danh mục</label>
                             <select name="catid" class="form-select" required>
                                 <option value="">-- Chọn danh mục nón --</option>
@@ -64,12 +64,16 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="form-label">Giá bán (VNĐ)</label>
                             <div class="input-group">
                                 <input type="number" name="price" class="form-control text-primary fw-bold" value="{{ $product->price }}" required>
-                                <span class="input-group-text">VND</span>
+                                <span class="input-group-text">đ</span>
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Số lượng</label>
+                            <input type="number" name="quantity" class="form-control fw-bold" value="{{ $product->quantity }}" required min="0">
                         </div>
                     </div>
 
@@ -81,7 +85,7 @@
                         <i class="fa fa-star text-warning"></i>
                     </div>
 
-                    <div class="bg-light p-3 rounded mb-4 border">
+                    <!-- <div class="bg-light p-3 rounded mb-4 border">
                         <h6 class="fw-bold mb-3 border-bottom pb-2">Thông số kỹ thuật</h6>
                         <div class="row g-2">
                             <div class="col-md-6">
@@ -109,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="mb-4">
                         <label class="form-label fw-bold">Mô tả chi tiết</label>

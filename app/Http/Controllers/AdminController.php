@@ -23,15 +23,14 @@ class AdminController extends Controller
         $totalOrders = Order::count();
         $revenue = Order::where('status', 'completed')->sum('total_amount');
 
-        return view('admin.dashboard', compact('totalCustomers', 'totalProducts', 'totalOrders', 'revenue'));
-    }
+        // LẤY THÊM DỮ LIỆU MỚI CHO BẢNG BÊN DƯỚI
+        // 5 đơn hàng mới nhất
+        $recentOrders = Order::with('user')->orderBy('id', 'desc')->take(5)->get();
+        // 5 sản phẩm mới thêm
+        $recentProducts = Product::orderBy('id', 'desc')->take(5)->get();
 
-    // ==========================================
-    // 2. QUẢN LÝ SẢN PHẨM (MŨ BẢO HIỂM)
-    // ==========================================
-    // ==========================================
-    // 2. QUẢN LÝ SẢN PHẨM (MŨ BẢO HIỂM)
-    // ==========================================
+        return view('admin.dashboard', compact('totalCustomers', 'totalProducts', 'totalOrders', 'revenue', 'recentOrders', 'recentProducts'));
+    }
     public function products()
     {
         $products = Product::with('category')->orderBy('id', 'desc')->paginate(10);
@@ -57,14 +56,8 @@ class AdminController extends Controller
         if ($request->hasFile('img_upload')) {
             $file = $request->file('img_upload');
             $filename = time() . '_' . $file->getClientOriginalName();
-            
-            // Đường dẫn mới sẽ tự động nối thêm tên folder danh mục
             $destinationPath = public_path('uploads/products/' . $folderName);
-            
-            // move() sẽ tự tạo folder 'mu-xe-dap' nếu nó chưa có
             $file->move($destinationPath, $filename);
-            
-            // Lưu đường dẫn này vào Database
             $imagePath = '/uploads/products/' . $folderName . '/' . $filename;
         } else {
             $imagePath = $request->img;
@@ -76,6 +69,7 @@ class AdminController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'price' => $request->price,
+            'quantity' => $request->quantity ?? 0,
             'detail' => $request->detail,
             'specs' => $specs,
             'catid' => $request->catid,
@@ -121,6 +115,7 @@ class AdminController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'price' => $request->price,
+            'quantity' => $request->quantity ?? 0,
             'detail' => $request->detail,
             'specs' => $specs,
             'catid' => $request->catid,

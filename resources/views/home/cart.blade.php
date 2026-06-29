@@ -86,9 +86,6 @@
                         </div>
                         <div class="d-flex justify-content-between mb-4 border-bottom pb-3">
                             <h5 class="mb-0 me-4">Phí vận chuyển:</h5>
-                            <div class="">
-                                <p class="mb-0">Cố định: 75.000đ</p>
-                            </div>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 ps-4 me-4">Thành tiền</h5>

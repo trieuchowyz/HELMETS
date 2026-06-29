@@ -12,6 +12,7 @@ class Product extends Model
         "slug",
         "parent_id",
         "price",
+        "quantity",
         "detail",
         "color", // Vẫn giữ lại lỡ Frontend của bạn còn gọi tới
         "specs", // Thêm cột specs chứa thông số PC

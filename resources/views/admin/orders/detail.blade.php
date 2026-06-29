@@ -9,6 +9,7 @@
             <div class="card-body">
                 <p><strong>Tên:</strong> {{ $order->user->name ?? 'N/A' }}</p>
                 <p><strong>Email:</strong> {{ $order->user->email ?? 'N/A' }}</p>
+                <p><strong>SDT:</strong> {{ $order->user->sdt ?? 'N/A' }}</p>
                 <p><strong>Địa chỉ giao:</strong> {{ $order->shipping_address }}</p>
                 <p><strong>Thanh toán:</strong> {{ $order->payment_method }}</p>
                 <p><strong>Ngày đặt:</strong> {{ $order->created_at->format('d/m/Y H:i') }}</p>

@@ -11,11 +11,17 @@ class ProductController extends Controller
     public function index($menu, Request $request)
     {
         $m = Menu::where('slug', $menu)->first();
+        
+        if (!$m) {
+            abort(404, 'Không tìm thấy danh mục');
+        }
+        
         $title = $m->name;
-        $products = Product
-            ::with('menu')
+        
+        $products = Product::with('menu')
             ->where('catid', $m->catid)
             ->where('parent_id', null)
+            ->where('quantity', '>', 0) // Cập nhật: Chỉ lấy sản phẩm có số lượng > 0
             ->orderby('id', 'desc')
             ->paginate(9);
 
@@ -36,12 +42,14 @@ class ProductController extends Controller
         }
         $title = $m->name;
 
-        // Dùng findOrFail để nếu ID sản phẩm không có thật thì tự nhảy trang 404
-        $product = Product::with('menu')->findOrFail($id);
+        // Cập nhật: Thêm where('quantity', '>', 0) trước findOrFail
+        // Nếu sản phẩm = 0, hàm findOrFail sẽ tự động bắn ra trang 404
+        $product = Product::with('menu')
+            ->where('quantity', '>', 0) 
+            ->findOrFail($id);
 
         return view('product.detail', compact('product', 'title'));
     }
-    // App\Http\Controllers\ProductController.php
 
     public function searchSuggestion(Request $request)
     {
@@ -56,10 +64,11 @@ class ProductController extends Controller
         // Đồng thời nạp kèm quan hệ 'menu' để lấy slug danh mục dựng URL
         $products = Product::with('menu')
             ->where('name', 'LIKE', '%' . $keyword . '%')
+            ->where('quantity', '>', 0) // Cập nhật: Không gợi ý sản phẩm hết hàng
             ->limit(10) // Giới hạn tối đa 10 kết quả gợi ý nhanh
             ->get();
 
-        // Định dạng lại dữ liệu trả về kèm link chi tiết .html giống cấu trúc route của bạn
+        // Định dạng lại dữ liệu trả về kèm link chi tiết .html giống cấu trúc route
         $results = $products->map(function ($product) {
             // Tạo link chuẩn: /{menu}/{slug}-{id}.html
             $menuSlug = $product->menu ? $product->menu->slug : 'san-pham';

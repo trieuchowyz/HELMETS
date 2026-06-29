@@ -19,19 +19,26 @@
                         <th>Tên sản phẩm</th>
                         <th>Danh mục</th>
                         <th>Giá bán</th>
+                        <th>Kho</th>
                         <th class="text-center">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($products as $item)
-                    <tr>
+                    <tr class="{{ $item->quantity <= 0 ? 'table-secondary text-muted' : '' }}" style="{{ $item->quantity <= 0 ? 'opacity: 0.6;' : '' }}">
                         <td>#{{ $item->id }}</td>
                         <td>
-                            <img src="{{ asset($item->img) }}" alt="" width="50" class="rounded">
+                            <img src="{{ asset($item->img) }}" alt="" width="50" class="rounded {{ $item->quantity <= 0 ? 'grayscale' : '' }}">
                         </td>
-                        <td class="fw-bold">{{ $item->name }}</td>
+                        <td class="fw-bold">
+                            {{ $item->name }}
+                            @if($item->quantity <= 0)
+                                <span class="badge bg-danger ms-2">Hết hàng</span>
+                            @endif
+                        </td>
                         <td>{{ $item->category->name ?? 'Không rõ' }}</td>
                         <td class="text-danger fw-bold">{{ number_format($item->price, 0, ',', '.') }}đ</td>
+                        <td class="fw-bold">{{ $item->quantity }}</td>
                         <td class="text-center">
                             <a href="{{ route('admin.products.edit', $item->id) }}" class="btn btn-sm btn-outline-info" title="Sửa"><i class="fas fa-edit"></i></a>
                             

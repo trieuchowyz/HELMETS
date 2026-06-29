@@ -276,11 +276,10 @@
                     <div id="tab-5" class="tab-pane fade show p-0 active">
                         <div class="row g-4 product">
                             @foreach ($products as $item)
-                            <div class="col-lg-4">
+                            @if($item->quantity > 0) <div class="col-lg-4">
                                 <div class="product-item rounded wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="product-item-inner border rounded">
                                         <div class="product-item-inner-item">
-                                            {{-- Đã fix đường dẫn an toàn --}}
                                             <a href="{{ url('/' . (optional($item->menu)->slug ?? 'san-pham') . '/' . $item->slug . '-' . $item->id . '.html') }}">
                                                 <img src="{{ asset($item->img) }}" class="img-fluid w-100 rounded-top" alt="{{ $item->name }}">
                                             </a>
@@ -306,10 +305,10 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach
+                            @endif @endforeach
                         </div>
 
-                        
+
                         <div class="row mt-5">
                             <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="pagination d-flex justify-content-center mt-5">
@@ -366,7 +365,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
 
                     </div>
                 </div>
