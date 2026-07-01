@@ -10,13 +10,17 @@ class Order extends Model
     use HasFactory;
 
     protected $table = 'orders';
-    protected $fillable = [
-        'user_id', 
-        'total_amount', 
-        'payment_method', 
-        'status', 
-        'shipping_address'
-    ];
+protected $fillable = [
+    'user_id', 
+    'total_amount', 
+    'payment_method', 
+    'status', 
+    'shipping_address',
+    'customer_name',    // <-- Thêm từ đây
+    'customer_phone', 
+    'shipping_fee', 
+    'note' 
+];
 
     // Đơn hàng thuộc về User nào
     public function user()

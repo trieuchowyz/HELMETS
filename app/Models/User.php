@@ -16,7 +16,10 @@ class User extends Authenticatable
         'email',
         'password',
         'avata',
-        'role', // Thêm quyền để Controller kiểm tra xem ai được vào Dashboard
+        'role',
+        'phone',
+        'address',
+        'status'
     ];
 
     protected $hidden = [
@@ -32,8 +35,9 @@ class User extends Authenticatable
         ];
     }
 
+
     // ==== CÁC HÀM THÊM MỚI PHỤC VỤ DASHBOARD VÀ THANH TOÁN ====
-    
+
     // User này có những đơn hàng nào
     public function orders()
     {
@@ -44,5 +48,9 @@ class User extends Authenticatable
     public function carts()
     {
         return $this->hasMany(Cart::class, 'user_id');
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'user_id');
     }
 }

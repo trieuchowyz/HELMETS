@@ -6,9 +6,9 @@
   <meta name="description" content="adminHMD professional admin dashboard template">
   <title>Dashboard | adminHMD</title>
 
-  <link rel="stylesheet" href=" {{ assets(admin_assets/css/bootstrap.min.css) }}">
-  <link rel="stylesheet" href=" {{ assets('admin_assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
-  <link rel="stylesheet" href=" {{ assets('admin_assets/css/style.css') }}">
+  <link rel="stylesheet" href=" {{ asset('admin_assets/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href=" {{ asset('admin_assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href=" {{ asset('admin_assets/css/style.css') }}">
 </head>
 <body>
   <div class="admin-shell">

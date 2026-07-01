@@ -8,30 +8,30 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 // ==========================================
-// 1. ROUTE DÀNH CHO ADMIN
+// 1. ROUTE DÀNH CHO ADMIN (Trang mặc định khi run)
 // ==========================================
-// Bọc toàn bộ route admin lại (Sau này bạn thêm middleware kiểm tra quyền admin ở đây)
+
+Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+// ==========================================
+// ROUTE DÀNH CHO ADMIN
+// ==========================================
 Route::prefix('admin')->name('admin.')->group(function () {
     
-    // Tổng quan
+    // Trang Tổng quan (Vào bằng: 127.0.0.1:8000/admin)
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
-    // Quản lý Sản phẩm (Gom ĐỦ 6 hành động vào đây)
-    Route::get('/products', [AdminController::class, 'products'])->name('products');
-    Route::get('/products/create', [AdminController::class, 'createProduct'])->name('products.create');
-    Route::post('/products/store', [AdminController::class, 'storeProduct'])->name('products.store');
-    Route::get('/products/edit/{id}', [AdminController::class, 'editProduct'])->name('products.edit');
-    Route::post('/products/update/{id}', [AdminController::class, 'updateProduct'])->name('products.update');
-    Route::get('/products/delete/{id}', [AdminController::class, 'deleteProduct'])->name('products.delete');
+    // Các trang UI mới cắt (chưa có logic)
+    Route::get('/thong-ke', [AdminController::class, 'thongKe'])->name('thong-ke');
+    Route::get('/quanly-donhang', [AdminController::class, 'quanLyDonHang'])->name('quanly-donhang');
+    Route::get('/khach-hang', [AdminController::class, 'users'])->name('users');
+    Route::get('/ho-so', [AdminController::class, 'profile'])->name('profile');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
 
-    // Quản lý Đơn hàng
-    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
-    Route::get('/orders/{id}', [AdminController::class, 'orderDetail'])->name('orders.detail');
-    Route::post('/orders/{id}/status', [AdminController::class, 'updateOrderStatus'])->name('orders.updateStatus');
 });
 
+
 // ==========================================
-// 2. CÁC TRANG TĨNH (Phải đặt trên các route động)
+// 2. CÁC TRANG TĨNH
 // ==========================================
 Route::get('/ve-chung-toi', function () {
     return view('home.ve-chung-toi');
@@ -57,7 +57,6 @@ Route::get('/bao-hanh', function () {
 // 3. ROUTE CHO KHÁCH HÀNG (Yêu cầu đăng nhập)
 // ==========================================
 Route::middleware('auth')->group(function() {
-    
     // Giỏ hàng
     Route::get('/cart',[CartController::class, 'index'])->name('home.cart');
     Route::get('/addproduct/{pid}/{q?}', [CartController::class, 'addcart'])->name('cart.addcart');
@@ -82,7 +81,8 @@ Route::post('/login', [HomeController::class, 'login']);
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 Route::post('/register', [HomeController::class, 'register']);
 
-Route::get('/', [HomeController::class, 'index'])->name('home.index');
+// Đã tạm dời trang chủ User cũ sang link /trang-chu để nhường đường dẫn gốc (/) cho Admin
+Route::get('/trang-chu', [HomeController::class, 'index'])->name('home.index');
 
 // Gợi ý tìm kiếm
 Route::get('/search-suggestion', [ProductController::class, 'searchSuggestion'])->name('product.search.suggestion');

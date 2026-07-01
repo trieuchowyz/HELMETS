@@ -14,10 +14,14 @@ class Product extends Model
         "price",
         "quantity",
         "detail",
-        "color", // Vẫn giữ lại lỡ Frontend của bạn còn gọi tới
-        "specs", // Thêm cột specs chứa thông số PC
+        "color",
+        "specs",
         "catid",
-        "img"
+        "img",
+        "sku",
+        "sale_price",
+        "views",
+        "status"
     ];
 
     // Ép kiểu JSON trong DB thành mảng (array) để sau này lấy thông số PC ra Frontend cực dễ
@@ -26,21 +30,24 @@ class Product extends Model
     ];
 
     // ==== GIỮ NGUYÊN 100% ĐỂ KHÔNG SẬP FRONTEND ====
-    public function menu(){
+    public function menu()
+    {
         return $this->hasOne(Menu::class, 'catid', 'catid');
     }
 
     // ==== CÁC HÀM THÊM MỚI PHỤC VỤ DASHBOARD ADMIN ====
-    
-    // Sản phẩm thuộc Danh mục nào
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'catid');
     }
 
-    // Sản phẩm này nằm trong các chi tiết đơn hàng nào
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class, 'product_id');
+    }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'product_id');
     }
 }

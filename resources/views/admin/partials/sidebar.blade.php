@@ -5,62 +5,75 @@
         <a class="brand-mark" href="index.html" aria-label="adminHMD dashboard">
             <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
             <span class="brand-copy">
-                <span class="brand-title">adminHMD</span>
-                <span class="brand-subtitle">Admin Template</span>
+                <span class="brand-title">HELMETS</span>
+                <span class="brand-subtitle">Quản trị viên</span>
             </span>
         </a>
     </div>
 
     <nav class="sidebar-nav">
-        <a class="nav-link active" href="index.html" aria-current="page">
-            <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
-            <span class="nav-text">Dashboard</span>
-        </a>
-        <a class="nav-link" href="users.html">
-            <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
-            <span class="nav-text">Users</span>
-        </a>
-        <a class="nav-link" href="add-user.html">
-            <span class="nav-icon"><i class="bi bi-person-plus" aria-hidden="true"></i></span>
-            <span class="nav-text">Add User</span>
-        </a>
-        <a class="nav-link" href="profile.html">
-            <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
-            <span class="nav-text">Profile</span>
-        </a>
-        <a class="nav-link" href="charts.html">
-            <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
-            <span class="nav-text">Charts</span>
-        </a>
-        <a class="nav-link" href="tables.html">
-            <span class="nav-icon"><i class="bi bi-table" aria-hidden="true"></i></span>
-            <span class="nav-text">Tables</span>
-        </a>
-        <a class="nav-link" href="forms.html">
-            <span class="nav-icon"><i class="bi bi-ui-checks-grid" aria-hidden="true"></i></span>
-            <span class="nav-text">Forms</span>
-        </a>
-        <a class="nav-link" href="components.html">
-            <span class="nav-icon"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i></span>
-            <span class="nav-text">Components</span>
-        </a>
-        <a class="nav-link" href="alerts.html">
-            <span class="nav-icon"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i></span>
-            <span class="nav-text">Alerts</span>
-        </a>
-        <a class="nav-link" href="modals.html">
-            <span class="nav-icon"><i class="bi bi-window-stack" aria-hidden="true"></i></span>
-            <span class="nav-text">Modals</span>
-        </a>
-        <a class="nav-link" href="settings.html">
-            <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
-            <span class="nav-text">Settings</span>
-        </a>
-        <a class="nav-link" href="blank.html">
-            <span class="nav-icon"><i class="bi bi-file-earmark" aria-hidden="true"></i></span>
-            <span class="nav-text">Blank Page</span>
-        </a>
-    </nav>
+    
+    <div class="px-4 mt-3 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+        Báo cáo
+    </div>
+    <a class="nav-link active" href="{{ route('admin.dashboard') }}" aria-current="page">
+        <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+        <span class="nav-text">Tổng quan</span>
+    </a>
+    <a class="nav-link" href="{{ route('admin.thong-ke') }}">
+        <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
+        <span class="nav-text">Thống kê doanh thu</span>
+    </a>
+
+    <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+        Kinh doanh
+    </div>
+    <a class="nav-link" href="{{ url('/quanly-donhang') }}">
+        <span class="nav-icon"><i class="bi bi-bag-check" aria-hidden="true"></i></span>
+        <span class="nav-text">Quản lý Đơn hàng</span>
+    </a>
+    <a class="nav-link" href="{{ url('/') }}">
+        <span class="nav-icon"><i class="bi bi-ticket-perforated" aria-hidden="true"></i></span>
+        <span class="nav-text">Mã ưu đãi (Coupons)</span>
+    </a>
+
+    <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+        Sản phẩm
+    </div>
+    <a class="nav-link" href="{{ url('/') }}">
+        <span class="nav-icon"><i class="bi bi-tags" aria-hidden="true"></i></span>
+        <span class="nav-text">Quản lý Danh mục</span>
+    </a>
+    <a class="nav-link" href="{{ url('/') }}">
+        <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
+        <span class="nav-text">Quản lý Sản phẩm</span>
+    </a>
+
+    <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+        Tài khoản
+    </div>
+    <a class="nav-link" href="{{ url('/khach-hang') }}">
+        <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
+        <span class="nav-text">Khách hàng</span>
+    </a>
+    <a class="nav-link" href="{{ url('/') }}">
+        <span class="nav-icon"><i class="bi bi-person-vcard" aria-hidden="true"></i></span>
+        <span class="nav-text">Nhân viên</span>
+    </a>
+
+    <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
+        Hệ thống
+    </div>
+    <a class="nav-link" href="{{ url('/ho-so') }}">
+        <span class="nav-icon"><i class="bi bi-person-circle" aria-hidden="true"></i></span>
+        <span class="nav-text">Hồ sơ cá nhân</span>
+    </a>
+    <a class="nav-link" href="{{ url('/settings') }}">
+        <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+        <span class="nav-text">Cấu hình hệ thống</span>
+    </a>
+
+</nav>
 
     <div class="sidebar-user">
         <img class="avatar-img avatar-md sidebar-user-avatar" src="../assets/images/avatar/avatar.jpg"
