@@ -5,30 +5,52 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\ThongkeController;
+use App\Http\Controllers\Admin\QLdonhangController;
+use App\Http\Controllers\Admin\QLdanhmucController;
+use App\Http\Controllers\Admin\QLsanphamController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\Admin\VoucherController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
 // ==========================================
-// 1. ROUTE DÀNH CHO ADMIN (Trang mặc định khi run)
+// TRANG MẶC ĐỊNH KHI RUN (127.0.0.1:8000)
 // ==========================================
+Route::get('/', [IndexController::class, 'index'])->name('admin.home');
 
-Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+
 // ==========================================
-// ROUTE DÀNH CHO ADMIN
+// ROUTE ADMIN CÓ 
 // ==========================================
 Route::prefix('admin')->name('admin.')->group(function () {
     
-    // Trang Tổng quan (Vào bằng: 127.0.0.1:8000/admin)
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    // Trang Tổng quan (127.0.0.1:8000/admin)
+    Route::get('/', [IndexController::class, 'index'])->name('dashboard');
 
-    // Các trang UI mới cắt (chưa có logic)
-    Route::get('/thong-ke', [AdminController::class, 'thongKe'])->name('thong-ke');
-    Route::get('/quanly-donhang', [AdminController::class, 'quanLyDonHang'])->name('quanly-donhang');
-    Route::get('/khach-hang', [AdminController::class, 'users'])->name('users');
-    Route::get('/ho-so', [AdminController::class, 'profile'])->name('profile');
-    Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+    // Báo cáo & Thống kê
+    Route::get('/thong-ke', [ThongkeController::class, 'index'])->name('thong-ke');
+
+    // Kinh doanh
+    Route::get('/quanly-donhang', [QLdonhangController::class, 'index'])->name('quanly-donhang');
+    Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
+
+    // Sản phẩm & Danh mục
+    Route::get('/danh-muc', [QLdanhmucController::class, 'index'])->name('danhmuc');
+    Route::get('/san-pham', [QLsanphamController::class, 'index'])->name('sanpham');
+
+    // Tài khoản (Khách hàng & Nhân viên)
+    Route::get('/khach-hang', [CustomerController::class, 'index'])->name('customers');
+    Route::get('/nhan-vien', [StaffController::class, 'index'])->name('staffs');
+
+    // Hệ thống
+    Route::get('/ho-so', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
 
 });
-
 
 // ==========================================
 // 2. CÁC TRANG TĨNH

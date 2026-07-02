@@ -28,11 +28,11 @@
     <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
         Kinh doanh
     </div>
-    <a class="nav-link" href="{{ url('/quanly-donhang') }}">
+    <a class="nav-link" href="{{ route('admin.quanly-donhang') }}">
         <span class="nav-icon"><i class="bi bi-bag-check" aria-hidden="true"></i></span>
         <span class="nav-text">Quản lý Đơn hàng</span>
     </a>
-    <a class="nav-link" href="{{ url('/') }}">
+    <a class="nav-link" href="{{ route('admin.voucher') }}">
         <span class="nav-icon"><i class="bi bi-ticket-perforated" aria-hidden="true"></i></span>
         <span class="nav-text">Mã ưu đãi (Coupons)</span>
     </a>
@@ -40,11 +40,11 @@
     <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
         Sản phẩm
     </div>
-    <a class="nav-link" href="{{ url('/') }}">
+    <a class="nav-link" href="{{ route('admin.danhmuc') }}">
         <span class="nav-icon"><i class="bi bi-tags" aria-hidden="true"></i></span>
         <span class="nav-text">Quản lý Danh mục</span>
     </a>
-    <a class="nav-link" href="{{ url('/') }}">
+    <a class="nav-link" href="{{ route('admin.sanpham') }}">
         <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
         <span class="nav-text">Quản lý Sản phẩm</span>
     </a>
@@ -52,11 +52,11 @@
     <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
         Tài khoản
     </div>
-    <a class="nav-link" href="{{ url('/khach-hang') }}">
+    <a class="nav-link" href="{{ route('admin.customers') }}">
         <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
         <span class="nav-text">Khách hàng</span>
     </a>
-    <a class="nav-link" href="{{ url('/') }}">
+    <a class="nav-link" href="{{ route('admin.staffs') }}">
         <span class="nav-icon"><i class="bi bi-person-vcard" aria-hidden="true"></i></span>
         <span class="nav-text">Nhân viên</span>
     </a>
@@ -64,11 +64,11 @@
     <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
         Hệ thống
     </div>
-    <a class="nav-link" href="{{ url('/ho-so') }}">
+    <a class="nav-link" href="{{ route('admin.profile') }}">
         <span class="nav-icon"><i class="bi bi-person-circle" aria-hidden="true"></i></span>
         <span class="nav-text">Hồ sơ cá nhân</span>
     </a>
-    <a class="nav-link" href="{{ url('/settings') }}">
+    <a class="nav-link" href="{{ route('admin.settings') }}">
         <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
         <span class="nav-text">Cấu hình hệ thống</span>
     </a>

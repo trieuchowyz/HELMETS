@@ -1,14 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Admin; // Thêm chữ \Admin vào đây
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller; // Bắt buộc phải thêm dòng này để kế thừa
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use Carbon\Carbon;
+use App\Services\BangThongKeService;
 
 class ThongKeController extends Controller
 {
-    // Trang Tổng quan (Dashboard)
     public function index() {
-        return view('admin.thong-ke');
+    $monthlyRevenue = BangThongKeService::getMonthlyRevenue();
+
+    return view('admin.thong-ke', compact('monthlyRevenue'));
     }
+
 }
