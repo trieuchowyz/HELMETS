@@ -38,9 +38,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/quanly-donhang', [QLdonhangController::class, 'index'])->name('quanly-donhang');
     Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
 
-    // Sản phẩm & Danh mục
+    // Danh mục
     Route::get('/danh-muc', [QLdanhmucController::class, 'index'])->name('danhmuc');
+    Route::post('/danh-muc/store', [QLdanhmucController::class, 'store'])->name('danhmuc.store');
+    Route::post('/danh-muc/update/{id}', [QLdanhmucController::class, 'update'])->name('danhmuc.update');
+    Route::post('/danh-muc/toggle/{id}', [QLdanhmucController::class, 'toggleStatus'])->name('danhmuc.toggle');
+    
+    // Sản phẩm
     Route::get('/san-pham', [QLsanphamController::class, 'index'])->name('sanpham');
+    Route::get('/san-pham-an', [QLsanphamController::class, 'hidden'])->name('sanpham.hidden'); // Trang xem SP đã ẩn
+    Route::post('/san-pham/toggle/{id}', [QLsanphamController::class, 'toggleStatus'])->name('sanpham.toggle');
+    Route::post('/san-pham/bulk-update', [QLsanphamController::class, 'bulkUpdate'])->name('sanpham.bulkUpdate'); // Lưu hàng loạt
+    Route::get('/san-pham/them-hang-loat', [QLsanphamController::class, 'bulkCreate'])->name('sanpham.bulkCreate');
+    Route::post('/san-pham/store-hang-loat', [QLsanphamController::class, 'storeBulk'])->name('sanpham.storeBulk');
+    Route::post('/san-pham/sua-hang-loat', [QLsanphamController::class, 'bulkEdit'])->name('sanpham.bulkEdit');
+    Route::post('/san-pham/update-hang-loat-nang-cao', [QLsanphamController::class, 'updateBulkAdvanced'])->name('sanpham.updateBulkAdvanced');
 
     // Tài khoản (Khách hàng & Nhân viên)
     Route::get('/khach-hang', [CustomerController::class, 'index'])->name('customers');
@@ -49,6 +61,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Hệ thống
     Route::get('/ho-so', [ProfileController::class, 'index'])->name('profile');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    
+    // Quản lý Voucher
+    Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
+    Route::post('/voucher/store', [VoucherController::class, 'store'])->name('voucher.store');
+    Route::post('/voucher/update/{id}', [VoucherController::class, 'update'])->name('voucher.update');
+    Route::delete('/voucher/delete/{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');
 
 });
 

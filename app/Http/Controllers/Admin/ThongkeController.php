@@ -13,7 +13,15 @@ class ThongKeController extends Controller
     public function index() {
     $monthlyRevenue = BangThongKeService::getMonthlyRevenue();
 
-    return view('admin.thong-ke', compact('monthlyRevenue'));
+    $totalOrders = Order::count();
+        $orderStats = [
+            'completed' => Order::where('status', 'completed')->count(),
+            'shipped'   => Order::where('status', 'shipped')->count(),
+            'pending'   => Order::where('status', 'pending')->count(),
+        ];
+
+        // 2. BỔ SUNG BIẾN VÀO COMPACT
+        return view('admin.thong-ke', compact('monthlyRevenue', 'totalOrders', 'orderStats'));
     }
 
 }
