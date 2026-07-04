@@ -2,7 +2,7 @@
 
 <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
     <div class="sidebar-header">
-        <a class="brand-mark" href="index.html" aria-label="adminHMD dashboard">
+        <a class="brand-mark" href="{{ route('admin.dashboard') }}" aria-label="adminHMD dashboard">
             <span class="brand-icon"><i class="bi bi-grid-1x2-fill" aria-hidden="true"></i></span>
             <span class="brand-copy">
                 <span class="brand-title">HELMETS</span>
@@ -67,10 +67,6 @@
     <a class="nav-link" href="{{ route('admin.profile') }}">
         <span class="nav-icon"><i class="bi bi-person-circle" aria-hidden="true"></i></span>
         <span class="nav-text">Hồ sơ cá nhân</span>
-    </a>
-    <a class="nav-link" href="{{ route('admin.settings') }}">
-        <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
-        <span class="nav-text">Cấu hình hệ thống</span>
     </a>
 
 </nav>

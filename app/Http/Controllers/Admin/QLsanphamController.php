@@ -21,8 +21,6 @@ class QLsanphamController extends Controller
 
         // Phân trang tự động 12 SP/trang
         $products = $query->paginate(12);
-        
-        // Lấy danh sách danh mục (bỏ qua danh mục cha gốc nếu nó không chứa trực tiếp SP)
         $categories = Category::where('status', 1)->get();
 
         return view('admin.QLsanpham', compact('products', 'categories'));

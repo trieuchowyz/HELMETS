@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +12,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'email',
+        'email', // Vẫn giữ để nếu sau này khách muốn bổ sung email nhận hóa đơn
         'password',
         'avata',
         'role',
@@ -30,13 +29,12 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
 
-    // ==== CÁC HÀM THÊM MỚI PHỤC VỤ DASHBOARD VÀ THANH TOÁN ====
+    // ==== CÁC HÀM LIÊN KẾT PHỤC VỤ DASHBOARD VÀ THANH TOÁN ====
 
     // User này có những đơn hàng nào
     public function orders()
@@ -49,6 +47,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'user_id');
     }
+    
+    // User này đã đánh giá sản phẩm nào
     public function reviews()
     {
         return $this->hasMany(Review::class, 'user_id');

@@ -25,18 +25,13 @@
                         
                         <div class="row g-4 mb-4">
                             <div class="col-12">
-                                <label for="username" class="form-label fw-bold">Tên đăng nhập <span class="text-danger">*</span></label>
-                                <input type="text" name="username" id="username" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="Nhập tên đăng nhập..." required>
-                            </div>
-
-                            <div class="col-12">
                                 <label for="name" class="form-label fw-bold">Họ và tên <span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="VD: Nguyễn Văn Triều" required>
                             </div>
 
                             <div class="col-12">
-                                <label for="email" class="form-label fw-bold">Địa chỉ Email <span class="text-danger">*</span></label>
-                                <input type="email" name="email" id="email" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="VD: email@example.com" required>
+                                <label for="phone" class="form-label fw-bold">Số điện thoại <span class="text-danger">*</span></label>
+                                <input type="tel" name="phone" id="phone" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="VD: 0912345678" pattern="[0-9]{10,11}" required>
                             </div>
 
                             <div class="col-md-6">
@@ -46,7 +41,7 @@
 
                             <div class="col-md-6">
                                 <label for="confirmPass" class="form-label fw-bold">Xác nhận mật khẩu <span class="text-danger">*</span></label>
-                                <input type="password" name="password_confirmation" id="confirmPass" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="Nhập lại mật khẩu..." required>
+                                <input type="password" name="password_confirmation" id="confirmPass" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="Nhập lại..." required>
                             </div>
                         </div>
 

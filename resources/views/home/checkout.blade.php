@@ -16,8 +16,8 @@
                                 <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
                             </div>
                             <div class="col-md-12">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="text" class="form-control" value="{{ Auth::user()->phone }}" readonly>
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Địa chỉ nhận hàng (Bắt buộc) <span class="text-danger">*</span></label>

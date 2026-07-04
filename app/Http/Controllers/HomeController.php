@@ -10,14 +10,13 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    //
+    // Trang chủ
     public function index()
     {
         $products = Product::with('menu')
             ->where('parent_id', null)
-            ->where('quantity', '>', 0) // <-- BỔ SUNG DÒNG NÀY ĐỂ ẨN SẢN PHẨM HẾT HÀNG
+            ->where('quantity', '>', 0) // Ẩn sản phẩm hết hàng
             ->orderby('id', 'desc')
-            // ->limit(8)
             ->get();
         return view('home.index', compact('products'));
     }
@@ -27,70 +26,61 @@ class HomeController extends Controller
         return view('home.contact', ['title' => 'Contact']);
     }
 
+    // Đăng ký
     public function register(Request $request)
     {
         if ($request->isMethod('POST')) {
             $request->validate([
-                'username' => 'required',
-                'email' => 'required|email',
-                'password' => 'required'
+                'name' => 'required|string|max:255',
+                'phone' => 'required|numeric|unique:users,phone', // Bắt lỗi trùng số điện thoại
+                'password' => 'required|min:6|confirmed' // Tự động đối chiếu với ô password_confirmation
+            ], [
+                'phone.unique' => 'Số điện thoại này đã được đăng ký.',
+                'password.confirmed' => 'Xác nhận mật khẩu không khớp.'
             ]);
 
             User::create([
-                'name' => $request->username,
-                'email' => $request->email,
+                'name' => $request->name,
+                'phone' => $request->phone,
                 'password' => Hash::make($request->password),
+                'role' => 'customer',
+                'status' => 1 // Tài khoản mới tạo mặc định hoạt động
             ]);
-            return redirect()->route('login')->with('success', 'Tạo tài khoản thành công');
+            return redirect()->route('login')->with('success', 'Tạo tài khoản thành công! Vui lòng đăng nhập.');
         }
 
         return view('home.register');
     }
     
+    // Đăng nhập
     public function login(Request $request)
     {
-        // 1. Nếu là request GET thì hiển thị form giao diện đăng nhập
         if ($request->isMethod('get')) {
             return view('home.login');
         }
 
-        // 2. Nếu là request POST thì bắt đầu xử lý đăng nhập
         $request->validate([
-            'username' => 'required', // Form m đang dùng name="username" cho ô nhập email
+            'phone' => 'required|numeric',
             'password' => 'required'
         ]);
 
-        // 3. Tiến hành kiểm tra tài khoản (so khớp email trong CSDL với ô username m nhập)
-        if (Auth::attempt(['email' => $request->username, 'password' => $request->password])) {
+        // Kiểm tra SĐT, Mật khẩu và điều kiện TÀI KHOẢN CHƯA BỊ KHÓA (status = 1)
+        if (Auth::attempt(['phone' => $request->phone, 'password' => $request->password, 'status' => 1])) {
             $request->session()->regenerate();
-
-            // ----------------------------------------------------
-            // KHÚC QUAN TRỌNG: KIỂM TRA QUYỀN ĐỂ ĐIỀU HƯỚNG
-            // ----------------------------------------------------
-            if (Auth::user()->role === 'admin') {
-                // Nếu là Admin -> Cho bay thẳng vào trang Quản trị
-                return redirect()->route('admin.dashboard')->with('success', 'Chào mừng Admin quay trở lại!');
-            }
-
-            // Nếu chỉ là Customer bình thường -> Cho về trang chủ
             return redirect()->route('home.index')->with('success', 'Đăng nhập thành công!');
         }
 
-        // Đăng nhập sai thì đá về lại trang đăng nhập kèm báo lỗi
+        // Đăng nhập sai hoặc bị khóa thì đá về lại trang đăng nhập
         return back()->withErrors([
-            'username' => 'Tài khoản hoặc mật khẩu không chính xác.',
-        ]);
+            'phone' => 'Số điện thoại, mật khẩu không chính xác hoặc tài khoản đã bị khóa.',
+        ])->onlyInput('phone');
     }
  
+    // Đăng xuất
     public function logout(Request $request){
-        //đăng xuất tài khoản
         Auth::logout();
-        //Xóa thông tin người dùng được lưu trong session
         $request->session()->invalidate();
-        //Tạo token để bảo vệ người dùng
         $request->session()->regenerateToken();
-        //Chuyển trang
         return redirect('/');
     }
 }
-

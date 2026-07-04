@@ -29,8 +29,8 @@
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mb-4">
-                            <label class="fw-bold mb-2">Tên đăng nhập / Email <span class="text-danger">*</span></label>
-                            <input type="text" name="username" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="Nhập tài khoản của bạn..." required>
+                            <label class="fw-bold mb-2">Số điện thoại <span class="text-danger">*</span></label>
+                            <input type="tel" name="phone" class="form-control border-0 rounded-pill w-100 py-3 px-4" placeholder="Nhập số điện thoại của bạn..." pattern="[0-9]{10,11}" required>
                         </div>
 
                         <div class="mb-4">
