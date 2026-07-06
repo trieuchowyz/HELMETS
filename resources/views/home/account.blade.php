@@ -31,18 +31,21 @@
                                 <div class="accordion-item mb-3 border shadow-sm rounded">
                                     <h2 class="accordion-header" id="heading{{ $order->id }}">
                                         <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $order->id }}">
-                                            Đơn hàng #ORD-{{ $order->id }} &nbsp;|&nbsp; 
+                                            Đơn hàng #HMD-{{ $order->id }} &nbsp;|&nbsp; 
                                             Ngày đặt: {{ $order->created_at->format('d/m/Y') }} &nbsp;|&nbsp; 
                                             <span class="text-danger ms-2">{{ number_format($order->total_amount, 0, ',', '.') }}đ</span>
                                             
                                             <span class="ms-auto badge 
                                                 {{ $order->status == 'pending' ? 'bg-warning text-dark' : '' }}
-                                                {{ $order->status == 'processing' ? 'bg-info text-dark' : '' }}
                                                 {{ $order->status == 'shipped' ? 'bg-primary' : '' }}
                                                 {{ $order->status == 'completed' ? 'bg-success' : '' }}
                                                 {{ $order->status == 'cancelled' ? 'bg-danger' : '' }}
                                             ">
-                                                {{ strtoupper($order->status) }}
+                                                @if($order->status == 'pending') CHỜ XỬ LÝ
+                                                @elseif($order->status == 'shipped') ĐANG GIAO
+                                                @elseif($order->status == 'completed') HOÀN THÀNH
+                                                @elseif($order->status == 'cancelled') ĐÃ HỦY
+                                                @endif
                                             </span>
                                         </button>
                                     </h2>
@@ -50,6 +53,16 @@
                                         <div class="accordion-body">
                                             <p><strong>Giao đến:</strong> {{ $order->shipping_address }}</p>
                                             <p><strong>Thanh toán:</strong> {{ $order->payment_method == 'COD' ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}</p>
+                                            
+                                            @if($order->status == 'pending')
+                                                <div class="mb-3">
+                                                    <form action="{{ route('account.cancelOrder', $order->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-times-circle me-1"></i> Hủy đơn hàng này</button>
+                                                    </form>
+                                                </div>
+                                            @endif
+
                                             <table class="table table-bordered mt-3">
                                                 <thead class="bg-light">
                                                     <tr>

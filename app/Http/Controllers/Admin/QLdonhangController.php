@@ -13,4 +13,18 @@ class QLdonhangController extends Controller
         $orders = Order::with('user')->orderBy('created_at', 'desc')->get();
         return view('admin.QLdonhang', compact('orders'));
     }
+    public function show($id) {
+        // Lấy đơn hàng kèm theo chi tiết sản phẩm và thông tin người mua
+        $order = Order::with(['user', 'details.product'])->findOrFail($id);
+        return view('admin.QLdonhang_details', compact('order'));
+    }
+
+    // 3. Cập nhật trạng thái đơn hàng
+    public function updateStatus(Request $request, $id) {
+        $order = Order::findOrFail($id);
+        $order->status = $request->status;
+        $order->save();
+
+        return redirect()->back()->with('success', 'Cập nhật trạng thái đơn hàng thành công!');
+    }
 }

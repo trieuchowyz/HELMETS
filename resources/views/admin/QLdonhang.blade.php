@@ -53,6 +53,8 @@
                             <span class="badge text-bg-success">Hoàn thành</span>
                         @elseif($order->status == 'shipped')
                             <span class="badge text-bg-primary">Đang giao</span>
+                        @elseif($order->status == 'cancelled')
+                            <span class="badge text-bg-danger">Đã hủy</span>
                         @else
                             <span class="badge text-bg-warning">Chờ xử lý</span>
                         @endif
@@ -60,7 +62,7 @@
                     <td>{{ number_format($order->total_amount, 0, ',', '.') }} VNĐ</td>
                     <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
                     <td class="text-end">
-                        <a href="#" class="btn btn-light btn-sm">Xem chi tiết</a>
+                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-light btn-sm">Xem chi tiết</a>
                     </td>
                   </tr>
                   @endforeach

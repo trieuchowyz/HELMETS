@@ -33,6 +33,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Kinh doanh
     Route::get('/quanly-donhang', [QLdonhangController::class, 'index'])->name('quanly-donhang');
+    Route::get('/quanly-donhang/{id}', [QLdonhangController::class, 'show'])->name('orders.show'); // Route xem chi tiết
+    Route::post('/quanly-donhang/cap-nhat/{id}', [QLdonhangController::class, 'updateStatus'])->name('orders.updateStatus'); // Route cập nhật trạng thái
 
     // Quản lý Voucher
     Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher');
@@ -71,6 +73,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Hệ thống
     Route::get('/ho-so', [ProfileController::class, 'index'])->name('profile');
     Route::post('/ho-so/update', [ProfileController::class, 'update'])->name('profile.update'); 
+
+    
 });
 
 // ==========================================
@@ -113,6 +117,7 @@ Route::middleware('auth')->group(function() {
     
     // Trang tài khoản & Lịch sử mua hàng
     Route::get('/tai-khoan', [AccountController::class, 'index'])->name('account.index');
+    Route::post('/tai-khoan/huy-don/{id}', [AccountController::class, 'cancelOrder'])->name('account.cancelOrder');
 });
 
 // ==========================================

@@ -89,7 +89,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                             <h5 class="mb-0 ps-4 me-4">Thành tiền</h5>
-                            <p class="mb-0 pe-4 text-danger fw-bold fs-5" id="cart-total">{{ number_format($total + 75000, 0, ',', '.') }}đ</p>
+                            <p class="mb-0 pe-4 text-danger fw-bold fs-5" id="cart-total">{{ number_format($total + 0, 0, ',', '.') }}đ</p>
                         </div>
                         <a href="{{ route('cart.checkout') }}" class="btn btn-primary rounded-pill px-4 py-3 text-uppercase w-100 fw-bold">Tiến hành đặt hàng</a>
                     </div>
@@ -119,7 +119,7 @@
                         if(response.success) {
                             $('#item-total-' + id).text(formatCurrency(response.item_total));
                             $('#cart-subtotal').text(formatCurrency(response.cart_total));
-                            $('#cart-total').text(formatCurrency(response.cart_total + 75000));
+                            $('#cart-total').text(formatCurrency(response.cart_total + 0));
                         }
                     }
                 });
@@ -164,7 +164,7 @@
                             if(res.deleted) {
                                 row.fadeOut(300, function() { $(this).remove(); });
                                 $('#cart-subtotal').text(formatCurrency(res.cart_total));
-                                $('#cart-total').text(formatCurrency(res.cart_total + 75000));
+                                $('#cart-total').text(formatCurrency(res.cart_total + 0));
                                 if(res.cart_total == 0) {
                                     setTimeout(() => location.reload(), 500);
                                 }

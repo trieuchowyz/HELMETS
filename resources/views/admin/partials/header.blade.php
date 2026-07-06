@@ -40,18 +40,25 @@
                 </div>
             </div>
 
+            @php
+            // Lấy thông tin tài khoản Admin đang hoạt động
+            $currentAdmin = \App\Models\Staff::where('role', 'admin')->first();
+            @endphp
+
             <div class="dropdown">
-                <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <img class="avatar-img avatar-sm" src="{{ asset('assets/images/avatar/avatar.jpg') }}" alt="Admin Hasan">
-                    <span class="profile-name d-none d-sm-inline">Admin Hasan</span>
+                <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="avatar-img avatar-sm"
+                        src="{{ $currentAdmin && $currentAdmin->avata ? asset($currentAdmin->avata) : asset('admin_assets/images/avatar/default.jpg') }}"
+                        alt="{{ $currentAdmin->name ?? 'Admin' }}">
+
+                    <span class="profile-name d-none d-sm-inline">{{ $currentAdmin->name ?? 'Admin' }}</span>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="bi bi-person me-2"></i>Hồ sơ cá nhân</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" href="login.html">Sign out</a></li>
+                    
                 </ul>
             </div>
         </div>
