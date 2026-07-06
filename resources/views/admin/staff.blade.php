@@ -1,9 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-  <div class="admin-shell">
-    <div class="admin-main">
-      <main class="dashboard-content">
+
         <div class="container-fluid px-3 px-lg-4 py-4">
           
           <div class="page-heading d-flex justify-content-between align-items-center">
@@ -118,9 +116,7 @@
             <div class="p-3">{{ $staffs->links('pagination::bootstrap-5') }}</div>
           </section>
         </div>
-      </main>
-    </div>
-  </div>
+
 
   <div class="modal fade" id="addStaffModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">

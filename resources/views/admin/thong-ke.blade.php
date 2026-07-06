@@ -1,9 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-  <div class="admin-shell">
-    <div class="admin-main">
-      <main class="dashboard-content">
+
         <div class="container-fluid px-3 px-lg-4 py-4">
           
           <div class="page-heading">
@@ -48,8 +46,9 @@
                 </div>
                 
                 @php
-                    // Tính % cho phần ở giữa biểu đồ tròn (hiển thị % đơn đã hoàn thành)
-                    $completedPct = $totalOrders > 0 ? round(($orderStats['completed'] / $totalOrders) * 100) : 0;
+                    //Tính toán % đơn hàng hoàn thành
+                    $totalOrders = array_sum($orderStats);
+                    $completedPct = $totalOrders > 0 ? round(($orderStats['completed'] / $totalOrders) * 100, 1) : 0;
                 @endphp
                 
                 <div class="donut-chart mx-auto"><span>{{ $completedPct }}%</span></div>
@@ -67,13 +66,14 @@
                         <span class="legend-dot bg-warning"></span>Chờ xử lý 
                         <strong>{{ $orderStats['pending'] }} đơn</strong>
                     </div>
+                    <div>
+                        <span class="legend-dot bg-danger"></span>Đã hủy 
+                        <strong>{{ $orderStats['canceled'] }} đơn</strong>
                 </div>
               </div>
             </div>
 
           </section>
         </div>
-      </main>
-    </div>
-  </div>
+
 @endsection

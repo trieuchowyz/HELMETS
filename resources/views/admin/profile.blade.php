@@ -1,9 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-  <div class="admin-shell">
-    <div class="admin-main">
-      <main class="dashboard-content">
+
         <div class="container-fluid px-3 px-lg-4 py-4">
           
           <div class="page-heading">
@@ -103,7 +101,5 @@
           </section>
 
         </div>
-      </main>
-    </div>
-  </div>
+
 @endsection

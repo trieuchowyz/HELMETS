@@ -18,6 +18,7 @@ class ThongKeController extends Controller
             'completed' => Order::where('status', 'completed')->count(),
             'shipped'   => Order::where('status', 'shipped')->count(),
             'pending'   => Order::where('status', 'pending')->count(),
+            'canceled'  => Order::where('status', 'canceled')->count(),
         ];
 
         // 2. BỔ SUNG BIẾN VÀO COMPACT

@@ -30,173 +30,62 @@
         </div>
     </div>
 </div> -->
+{{-- Việt hóa lại toàn bộ phía dưới --}}
 <div class="container-fluid shop py-5">
     <div class="container py-5">
         <div class="row g-4">
             <div class="col-lg-3 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="product-categories mb-4">
-                    <h4>Products Categories</h4>
+                    <h4>Tất cả danh mục</h4>
                     <ul class="list-unstyled">
                         <li>
                             <div class="categories-item">
                                 <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                    Accessories</a>
-                                <span>(3)</span>
+                                    WIN 2</a>
+                                <span></span>
                             </div>
                         </li>
                         <li>
                             <div class="categories-item">
                                 <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                    NVTnics & Computer</a>
-                                <span>(5)</span>
+                                    WIN 3</a>
+                                <span></span>
                             </div>
                         </li>
                         <li>
                             <div class="categories-item">
                                 <a href="#" class="text-dark"><i
-                                        class="fas fa-apple-alt text-secondary me-2"></i>Laptops & Desktops</a>
-                                <span>(2)</span>
+                                        class="fas fa-apple-alt text-secondary me-2"></i>Mũ Em bé</a>
+                                <span></span>
                             </div>
                         </li>
                         <li>
                             <div class="categories-item">
                                 <a href="#" class="text-dark"><i
-                                        class="fas fa-apple-alt text-secondary me-2"></i>Mobiles & Tablets</a>
-                                <span>(8)</span>
+                                        class="fas fa-apple-alt text-secondary me-2"></i>Mũ xe máy</a>
+                                <span></span>
                             </div>
                         </li>
                         <li>
                             <div class="categories-item">
                                 <a href="#" class="text-dark"><i
-                                        class="fas fa-apple-alt text-secondary me-2"></i>SmartPhone & Smart TV</a>
-                                <span>(5)</span>
+                                        class="fas fa-apple-alt text-secondary me-2"></i>Mũ Full face</a>
+                                <span></span>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="price mb-4">
-                    <h4 class="mb-2">Price</h4>
+                    <h4 class="mb-2">Giá</h4>
                     <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0"
                         max="500" value="0" oninput="amount.value=rangeInput.value">
                     <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
                     <div class=""></div>
                 </div>
-                <div class="product-color mb-3">
-                    <h4>Select By Color</h4>
-                    <ul class="list-unstyled">
-                        <li>
-                            <div class="product-color-item">
-                                <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                    Gold</a>
-                                <span>(1)</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="product-color-item">
-                                <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                    Green</a>
-                                <span>(1)</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="product-color-item">
-                                <a href="#" class="text-dark"><i class="fas fa-apple-alt text-secondary me-2"></i>
-                                    White</a>
-                                <span>(1)</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="additional-product mb-4">
-                    <h4>Additional Products</h4>
-                    <div class="additional-product-item">
-                        <input type="radio" class="me-2" id="Categories-1" name="Categories-1" value="Beverages">
-                        <label for="Categories-1" class="text-dark"> Accessories</label>
-                    </div>
-                    <div class="additional-product-item">
-                        <input type="radio" class="me-2" id="Categories-2" name="Categories-1" value="Beverages">
-                        <label for="Categories-2" class="text-dark"> NVTnics & Computer</label>
-                    </div>
-                    <div class="additional-product-item">
-                        <input type="radio" class="me-2" id="Categories-3" name="Categories-1"
-                            value="Beverages">
-                        <label for="Categories-3" class="text-dark"> Laptops & Desktops</label>
-                    </div>
-                    <div class="additional-product-item">
-                        <input type="radio" class="me-2" id="Categories-4" name="Categories-1"
-                            value="Beverages">
-                        <label for="Categories-4" class="text-dark"> Mobiles & Tablets</label>
-                    </div>
-                    <div class="additional-product-item">
-                        <input type="radio" class="me-2" id="Categories-5" name="Categories-1"
-                            value="Beverages">
-                        <label for="Categories-5" class="text-dark"> SmartPhone & Smart TV</label>
-                    </div>
-                </div>
-                <div class="featured-product mb-4">
-                    <h4 class="mb-3">Featured products</h4>
-                    <div class="featured-product-item">
-                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                            <img src="img/product-3.png" class="img-fluid rounded" alt="Image">
-                        </div>
-                        <div>
-                            <h6 class="mb-2">SmartPhone</h6>
-                            <div class="d-flex mb-2">
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="featured-product-item">
-                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                            <img src="img/product-4.png" class="img-fluid rounded" alt="Image">
-                        </div>
-                        <div>
-                            <h6 class="mb-2">Smart Camera</h6>
-                            <div class="d-flex mb-2">
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="featured-product-item">
-                        <div class="rounded me-4" style="width: 100px; height: 100px;">
-                            <img src="img/product-5.png" class="img-fluid rounded" alt="Image">
-                        </div>
-                        <div>
-                            <h6 class="mb-2">Camera Leance</h6>
-                            <div class="d-flex mb-2">
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star text-secondary"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <div class="d-flex mb-2">
-                                <h5 class="fw-bold me-2">2.99 $</h5>
-                                <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center my-4">
-                        <a href="#" class="btn btn-primary px-4 py-3 rounded-pill w-100">Vew More</a>
-                    </div>
-                </div>
-                <a href="#">
+                
+                
+                
+                {{-- <a href="#">
                     <div class="position-relative">
                         <img src="img/product-banner-2.jpg" class="img-fluid w-100 rounded" alt="Image">
                         <div class="text-center position-absolute d-flex flex-column align-items-center justify-content-center rounded p-4"
@@ -206,8 +95,8 @@
                             <a href="#" class="btn btn-primary rounded-pill px-4">Shop Now</a>
                         </div>
                     </div>
-                </a>
-                <div class="product-tags py-4">
+                </a> --}}
+                {{-- <div class="product-tags py-4">
                     <h4 class="mb-3">PRODUCT TAGS</h4>
                     <div class="product-tags-items bg-light rounded p-3">
                         <a href="#" class="border rounded py-1 px-2 mb-2">New</a>
@@ -221,7 +110,7 @@
                         <a href="#" class="border rounded py-1 px-2 mb-2">talevision</a>
                         <a href="#" class="border rounded py-1 px-2 mb-2">slaes</a>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="col-lg-9 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="rounded mb-4 position-relative">
@@ -229,9 +118,9 @@
                         alt="Image">
                     <div class="position-absolute rounded d-flex flex-column align-items-center justify-content-center text-center"
                         style="width: 100%; height: 250px; top: 0; left: 0; background: rgba(242, 139, 0, 0.3);">
-                        <h4 class="display-5 text-primary">SALE</h4>
-                        <h3 class="display-4 text-white mb-4">Get UP To 50% Off</h3>
-                        <a href="#" class="btn btn-primary rounded-pill">Shop Now</a>
+                        <h4 class="display-5 text-primary">Giảm giá</h4>
+                        <h3 class="display-4 text-white mb-4">Lên đến 50%</h3>
+                        <a href="#" class="btn btn-primary rounded-pill">Mua ngay</a>
                     </div>
                 </div>
                 <div class="row g-4">

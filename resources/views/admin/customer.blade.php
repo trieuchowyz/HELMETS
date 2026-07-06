@@ -1,9 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-  <div class="admin-shell">
-    <div class="admin-main">
-      <main class="dashboard-content">
+
         <div class="container-fluid px-3 px-lg-4 py-4">
           <div class="page-heading d-flex justify-content-between align-items-center">
             <div class="page-heading-copy">
@@ -115,7 +113,5 @@
             <div class="p-3">{{ $customers->links('pagination::bootstrap-5') }}</div>
           </section>
         </div>
-      </main>
-    </div>
-  </div>
+
 @endsection

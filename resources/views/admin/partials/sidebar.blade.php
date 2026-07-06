@@ -16,11 +16,11 @@
         <div class="px-4 mt-3 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
             Báo cáo
         </div>
-        <a class="nav-link active" href="{{ route('admin.dashboard') }}" aria-current="page">
+        <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
             <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
             <span class="nav-text">Tổng quan</span>
         </a>
-        <a class="nav-link" href="{{ route('admin.thong-ke') }}">
+        <a class="nav-link {{ request()->routeIs('admin.thong-ke') ? 'active' : '' }}" href="{{ route('admin.thong-ke') }}">
             <span class="nav-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
             <span class="nav-text">Thống kê doanh thu</span>
         </a>
@@ -28,11 +28,11 @@
         <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
             Kinh doanh
         </div>
-        <a class="nav-link" href="{{ route('admin.quanly-donhang') }}">
+        <a class="nav-link {{ request()->routeIs('admin.quanly-donhang*') ? 'active' : '' }}" href="{{ route('admin.quanly-donhang') }}">
             <span class="nav-icon"><i class="bi bi-bag-check" aria-hidden="true"></i></span>
             <span class="nav-text">Quản lý Đơn hàng</span>
         </a>
-        <a class="nav-link" href="{{ route('admin.voucher') }}">
+        <a class="nav-link {{ request()->routeIs('admin.voucher*') ? 'active' : '' }}" href="{{ route('admin.voucher') }}">
             <span class="nav-icon"><i class="bi bi-ticket-perforated" aria-hidden="true"></i></span>
             <span class="nav-text">Mã ưu đãi (Coupons)</span>
         </a>
@@ -40,11 +40,11 @@
         <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
             Sản phẩm
         </div>
-        <a class="nav-link" href="{{ route('admin.danhmuc') }}">
+        <a class="nav-link {{ request()->routeIs('admin.danhmuc*') ? 'active' : '' }}" href="{{ route('admin.danhmuc') }}">
             <span class="nav-icon"><i class="bi bi-tags" aria-hidden="true"></i></span>
             <span class="nav-text">Quản lý Danh mục</span>
         </a>
-        <a class="nav-link" href="{{ route('admin.sanpham') }}">
+        <a class="nav-link {{ request()->routeIs('admin.sanpham*') ? 'active' : '' }}" href="{{ route('admin.sanpham') }}">
             <span class="nav-icon"><i class="bi bi-box-seam" aria-hidden="true"></i></span>
             <span class="nav-text">Quản lý Sản phẩm</span>
         </a>
@@ -52,11 +52,11 @@
         <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
             Tài khoản
         </div>
-        <a class="nav-link" href="{{ route('admin.customers') }}">
+        <a class="nav-link {{ request()->routeIs('admin.customers*') ? 'active' : '' }}" href="{{ route('admin.customers') }}">
             <span class="nav-icon"><i class="bi bi-people" aria-hidden="true"></i></span>
             <span class="nav-text">Khách hàng</span>
         </a>
-        <a class="nav-link" href="{{ route('admin.staffs') }}">
+        <a class="nav-link {{ request()->routeIs('admin.staffs*') ? 'active' : '' }}" href="{{ route('admin.staffs') }}">
             <span class="nav-icon"><i class="bi bi-person-vcard" aria-hidden="true"></i></span>
             <span class="nav-text">Nhân viên</span>
         </a>
@@ -64,7 +64,7 @@
         <div class="px-4 mt-4 mb-2 text-muted fw-bold text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;">
             Hệ thống
         </div>
-        <a class="nav-link" href="{{ route('admin.profile') }}">
+        <a class="nav-link {{ request()->routeIs('admin.profile*') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
             <span class="nav-icon"><i class="bi bi-person-circle" aria-hidden="true"></i></span>
             <span class="nav-text">Hồ sơ cá nhân</span>
         </a>
@@ -72,7 +72,7 @@
     </nav>
     
     @php
-    // Lấy thông tin tài khoản Admin đang hoạt động
+    // Lấy thông tin tài khoản Admin đang hoạt động để đồng bộ ra Sidebar
     $currentAdmin = \App\Models\Staff::where('role', 'admin')->first();
     @endphp
     <div class="sidebar-user text-center mt-3 mb-3">
@@ -87,6 +87,6 @@
 
     <div class="sidebar-footer">
         <span class="status-dot"></span>
-        <span class="sidebar-footer-text">System running smoothly</span>
+        <span class="sidebar-footer-text">Hệ thống ổn định</span>
     </div>
 </aside>

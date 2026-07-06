@@ -1,9 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-<div class="admin-shell">
-  <div class="admin-main">
-    <main class="dashboard-content">
+
       <div class="container-fluid px-3 px-lg-4 py-4">
         
         <div class="page-heading">
@@ -69,9 +67,7 @@
         </form>
         
       </div>
-    </main>
-  </div>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

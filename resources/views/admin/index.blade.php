@@ -2,9 +2,6 @@
 
 @section('content')
 
-<div class="admin-shell">
-  <div class="admin-main">
-    <main class="dashboard-content">
       <div class="container-fluid px-3 px-lg-4 py-4">
         <div class="page-heading">
           <div class="page-heading-copy">
@@ -86,13 +83,13 @@
           <div class="panel h-100">
             <div class="panel-header">
               <div>
-                <h2 class="h5 mb-1 section-title"><i class="bi bi-activity" aria-hidden="true"></i><span>Team
-                    Activity</span></h2>
-                <p class="text-muted mb-0">Recent operational updates.</p>
+                <h2 class="h5 mb-1 section-title"><i class="bi bi-activity" aria-hidden="true"></i><span>Hoạt động gần đây
+                    </span></h2>
+                <p class="text-muted mb-0">Cập nhật về hệ thống</p>
               </div>
             </div>
 
-            <div class="activity-list">
+            {{-- <div class="activity-list">
               <div class="activity-item"><span class="activity-dot bg-primary"></span>
                 <div>
                   <p class="mb-1 fw-semibold">New campaign launched</p>
@@ -111,7 +108,7 @@
                   <p class="text-muted small mb-0">Average first response time is 18 minutes.</p>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
         </section>
@@ -131,7 +128,7 @@
                 <tr>
                   <th scope="col">Người dùng</th>
                   <th scope="col">Vai trò</th>
-                  <th scope="col">Nhóm</th>
+                  <th scope="col">Số điện thoại</th>
                   <th scope="col">Trạng thái</th>
                   <th scope="col">Ngày tham gia</th>
                   <th scope="col" class="text-end">Hành động</th>
@@ -185,8 +182,5 @@
           </div>
         </section>
       </div>
-    </main>
-  </div>
-</div>
 
 @endsection
